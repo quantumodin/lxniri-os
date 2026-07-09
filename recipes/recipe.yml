@@ -6,7 +6,7 @@ name: lxniri-os
 description: lxqt-niri atomic fedora image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/lazurite-nvidia
+base-image: ghcr.io/ublue-os/base-nvidia
 image-version: latest # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
@@ -23,12 +23,17 @@ modules:
         - https://packages.microsoft.com/yumrepos/vscode/config.repo
       copr:
         - atim/starship
+    group-install:
+      - printing
+      - lxqt-desktop
     install:
       packages:
-        # niri stack
+        # desktop stack
         - niri
         - lxqt-wayland-session
+        - lxqt-niri-session
         - wdisplays
+        - sddm
 
         # fonts
         - google-noto-fonts-all
@@ -78,6 +83,7 @@ modules:
   - type: systemd
     system:
       enabled:
+        - sddm.service
         - waydroid-container
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
