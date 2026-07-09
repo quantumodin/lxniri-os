@@ -24,8 +24,10 @@ modules:
       copr:
         - atim/starship
     group-install:
-      - printing
-      - lxqt-desktop
+      with-optional: true
+      packages:
+        - printing
+        - lxqt-desktop
     install:
       packages:
         # desktop stack
